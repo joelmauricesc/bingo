@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IRL Stream Bingo</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0);
+        }
+        .bingo-container {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 5px;
+            width: 500px;
+            background: white;
+            padding: 10px;
+            border-radius: 10px;
+        }
+        .bingo-cell {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 90px;
+            height: 90px;
+            background-color: #f0f0f0;
+            border: 2px solid #000;
+            cursor: pointer;
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .marked {
+            background-color: #4caf50;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="bingo-container" id="bingoBoard"></div>
+
+    <script>
+        const bingoEntries = [
+            "Cosplayer gesehen", "Gratis Goodie bekommen", "Streamer getroffen", "Merch gekauft", "In der Warteschlange stehen",
+            "Jemand im Kostüm", "Ein neuer Follower", "Technikproblem", "Lauter als erwartet", "Überraschendes Treffen",
+            "Random Umfrage gemacht", "Etwas Peinliches passiert", "FREE", "Jemand erkennt dich", "Etwas Essen gekauft",
+            "Unbekanntes Spiel entdeckt", "Ein gutes Interview", "In den falschen Bereich gelaufen", "Chat rastet aus", "Ein Game ausprobiert",
+            "Lange Laufwege", "Jemand singt Karaoke", "Unfreiwillig im Hintergrund einer Aufnahme", "Lichtproblem", "Akku fast leer"
+        ];
+        
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+        
+        function generateBingoBoard() {
+            shuffle(bingoEntries);
+            const board = document.getElementById("bingoBoard");
+            for (let i = 0; i < 25; i++) {
+                const cell = document.createElement("div");
+                cell.classList.add("bingo-cell");
+                cell.textContent = bingoEntries[i];
+                cell.addEventListener("click", () => cell.classList.toggle("marked"));
+                board.appendChild(cell);
+            }
+        }
+        
+        generateBingoBoard();
+    </script>
+</body>
+</html>
